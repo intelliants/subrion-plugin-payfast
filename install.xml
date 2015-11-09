@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin name="payfast">
+	<title>Payfast</title>
+	<summary>Payfast payment gateway integration. Allows to accept payments using Payfast</summary>
+	<author>Intelliants LLC</author>
+	<contributor>Intelliants LLC</contributor>
+	<version>1.0.0</version>
+	<date>2015-05-29</date>
+	<category>payments</category>
+	<compatibility>3.3.3</compatibility>
+
+	<config group="financial" name="payfast" type="divider">Payfast</config>
+	<config group="financial" name="payfast_demo" type="radio" description="Demo mode" values="0,1">1</config>
+	<config group="financial" name="payfast_merchant_id" type="text" description="Merchant ID" show="payfast_demo|0"><![CDATA[]]></config>
+	<config group="financial" name="payfast_merchant_key" type="text" description="Merchant key" show="payfast_demo|0"><![CDATA[]]></config>
+
+	<hooks>
+		<hook name="paymentButtons" type="smarty" filename="plugins/payfast/templates/button.tpl" page_type="front"><![CDATA[]]></hook>
+	</hooks>
+</plugin>
