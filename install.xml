@@ -15,6 +15,6 @@
 	<config group="financial" name="payfast_merchant_key" type="text" description="Merchant key" show="payfast_demo|0"><![CDATA[]]></config>
 
 	<hooks>
-		<hook name="paymentButtons" type="smarty" filename="plugins/payfast/templates/button.tpl" page_type="front"><![CDATA[]]></hook>
+		<hook name="paymentButtons" type="smarty" filename="button" page_type="front"><![CDATA[]]></hook>
 	</hooks>
 </plugin>
