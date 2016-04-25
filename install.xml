@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin name="payfast">
+	<title>PayFast</title>
+	<summary>PayFast payment gateway integration. Allows to accept payments using PayFast</summary>
+	<author>Intelliants LLC</author>
+	<contributor>Intelliants LLC</contributor>
+	<version>2.0.0</version>
+	<date>2016-04-25</date>
+	<category>payments</category>
+	<compatibility>4.0</compatibility>
+
+	<config group="financial" name="payfast" type="divider">PayFast</config>
+	<config group="financial" name="payfast_demo" type="radio" description="Demo mode" values="0,1">1</config>
+	<config group="financial" name="payfast_merchant_id" type="text" description="Merchant ID" show="payfast_demo|0"><![CDATA[]]></config>
+	<config group="financial" name="payfast_merchant_key" type="text" description="Merchant key" show="payfast_demo|0"><![CDATA[]]></config>
+	<config group="email_templates" type="divider" description="PayPal"><![CDATA[]]></config>
+	<config group="email_templates" type="radio" name="payfast_ipn_admin" values="1,0" description="IPN payment processing notification">1</config>
+	<config group="email_templates" type="hidden" name="payfast_ipn_admin_subject">PayFast payment processed at {%SITE_NAME%}</config>
+	<config group="email_templates" type="hidden" name="payfast_ipn_admin_body" values="reference_id|Transaction ID,email|Email of payer,amount|Amount,fullname|Payer,status|Transaction status,currency|Currency">
+		<![CDATA[
+<p>Greetings,</p>
+<p><strong>New PayFast payment notification processed.</strong></p>
+<p>Below is the details:</p>
+<table>
+<tr>
+	<td>Transaction ID:</td>
+	<td>{%REFERENCE_ID%}</td>
+</tr>
+<tr>
+	<td>Payer:</td>
+	<td>{%FULLNAME%}</td>
+</tr>
+<tr>
+	<td>Email:</td>
+	<td>{%EMAIL%}</td>
+</tr>
+<tr>
+	<td>Amount:</td>
+	<td>{%AMOUNT%} {%CURRENCY%}</td>
+</tr>
+<tr>
+	<td>Transaction status:</td>
+	<td>{%STATUS%}</td>
+</tr>
+</table>
+		]]>
+	</config>
+
+	<hooks>
+		<hook name="paymentButtons" type="smarty" filename="button" page_type="front"><![CDATA[]]></hook>
+	</hooks>
+
+	<pages>
+		<page url="ipn/payfast/" name="ipn_payfast" service="1">Payfast ITN service page</page>
+	</pages>
+</plugin>
