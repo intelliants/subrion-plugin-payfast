@@ -13,7 +13,7 @@
 	<config group="financial" name="payfast_demo" type="radio" description="Demo mode" values="0,1">1</config>
 	<config group="financial" name="payfast_merchant_id" type="text" description="Merchant ID" show="payfast_demo|0"><![CDATA[]]></config>
 	<config group="financial" name="payfast_merchant_key" type="text" description="Merchant key" show="payfast_demo|0"><![CDATA[]]></config>
-	<config group="email_templates" type="divider" description="PayPal"><![CDATA[]]></config>
+	<config group="email_templates" type="divider" description="PayFast"><![CDATA[]]></config>
 	<config group="email_templates" type="radio" name="payfast_ipn_admin" values="1,0" description="IPN payment processing notification">1</config>
 	<config group="email_templates" type="hidden" name="payfast_ipn_admin_subject">PayFast payment processed at {%SITE_NAME%}</config>
 	<config group="email_templates" type="hidden" name="payfast_ipn_admin_body" values="reference_id|Transaction ID,email|Email of payer,amount|Amount,fullname|Payer,status|Transaction status,currency|Currency">

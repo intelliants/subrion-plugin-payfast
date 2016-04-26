@@ -8,17 +8,11 @@ class iaPayfast extends abstractPlugin
 
 	const VALID_RESPONSE = 'VALID';
 
-<<<<<<< HEAD
-	protected $_pluginName = 'paypal';
+	protected $_pluginName = 'payfast';
 
 	private $_configuration = array(
 		'merchant_id' => '10002972',
 		'merchant_key' => 'qnyof935i52rw'
-=======
-	private $_configuration = array(
-		'merchant_id' => '10000100',
-		'merchant_key' => '46f0cd694581a'
->>>>>>> f2b66f89ffcef02ece4b3158ee2ce46ea237eeb4
 	);
 
 	protected $_demoMode;
@@ -42,14 +36,11 @@ class iaPayfast extends abstractPlugin
 		}
 	}
 
-<<<<<<< HEAD
 	public function getPluginName()
 	{
 		return $this->_pluginName;
 	}
 
-=======
->>>>>>> f2b66f89ffcef02ece4b3158ee2ce46ea237eeb4
 	public function getForm($plan, $transaction)
 	{
 		$userData = iaUsers::getIdentity(true);
@@ -61,11 +52,7 @@ class iaPayfast extends abstractPlugin
 
 			'return_url' => IA_RETURN_URL . 'completed/',
 			'cancel_url' => IA_RETURN_URL . 'canceled/',
-<<<<<<< HEAD
 			'notify_url' => IA_URL . sprintf('ipn/payfast/%s/', $transaction['sec_key']),
-=======
-			'notify_url' => IA_RETURN_URL . 'completed/',
->>>>>>> f2b66f89ffcef02ece4b3158ee2ce46ea237eeb4
 
 			'name_first' => array_shift($userName),
 			'name_last' => implode(' ', $userName),
@@ -73,17 +60,11 @@ class iaPayfast extends abstractPlugin
 
 			'm_payment_id' => $transaction['id'],
 			'amount' => $plan['cost'],
-<<<<<<< HEAD
 			'item_name' => $plan['title']
 		);
 
 		$this->_demoMode && $result['email_address'] = 'sbtu01@payfast.co.za';
 
-=======
-			'item_name' => $plan['title'],
-		);
-
->>>>>>> f2b66f89ffcef02ece4b3158ee2ce46ea237eeb4
 		$result['signature'] = $this->_generateSignature($result);
 
 		return $result;
@@ -182,11 +163,7 @@ class iaPayfast extends abstractPlugin
 			CURLOPT_USERAGENT => 'Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)',
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_HEADER => false,
-<<<<<<< HEAD
 			CURLOPT_SSL_VERIFYHOST => 2,
-=======
-			CURLOPT_SSL_VERIFYHOST => true,
->>>>>>> f2b66f89ffcef02ece4b3158ee2ce46ea237eeb4
 			CURLOPT_SSL_VERIFYPEER => false,
 			CURLOPT_URL => $this->getHost('eng/query/validate'),
 			CURLOPT_POST => true,
@@ -198,7 +175,6 @@ class iaPayfast extends abstractPlugin
 
 		return $result;
 	}
-<<<<<<< HEAD
 
 	public function handleIpn(array $params, $transactionId)
 	{
@@ -242,6 +218,4 @@ class iaPayfast extends abstractPlugin
 
 		return $iaMailer->sendToAdministrators();
 	}
-=======
->>>>>>> f2b66f89ffcef02ece4b3158ee2ce46ea237eeb4
 }
