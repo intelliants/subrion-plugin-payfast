@@ -2,7 +2,7 @@
 /******************************************************************************
  *
  * Subrion - open source content management system
- * Copyright (C) 2016 Intelliants, LLC <http://www.intelliants.com>
+ * Copyright (C) 2017 Intelliants, LLC <https://intelliants.com>
  *
  * This file is part of Subrion.
  *
@@ -20,37 +20,34 @@
  * along with Subrion. If not, see <http://www.gnu.org/licenses/>.
  *
  *
- * @link http://www.subrion.org/
+ * @link https://subrion.org/
  *
  ******************************************************************************/
 
-if (iaView::REQUEST_HTML == $iaView->getRequestType())
-{
-	iaBreadcrumb::remove(iaBreadcrumb::POSITION_LAST);
-	$iaView->set('nocsrf', true);
-	$iaView->set('nodebug', true);
+if (iaView::REQUEST_HTML == $iaView->getRequestType()) {
+    iaBreadcrumb::remove(iaBreadcrumb::POSITION_LAST);
+    $iaView->set('nocsrf', true);
+    $iaView->set('nodebug', true);
 
-	if (empty($_POST) || 1 != count($iaCore->requestPath))
-	{
-		return iaView::errorPage(iaView::ERROR_NOT_FOUND);
-	}
+    if (empty($_POST) || 1 != count($iaCore->requestPath)) {
+        return iaView::errorPage(iaView::ERROR_NOT_FOUND);
+    }
 
-	$iaTransaction = $iaCore->factory('transaction');
-	$iaPayfast = $iaCore->factoryPlugin('payfast', 'common');
+    $iaTransaction = $iaCore->factory('transaction');
+    $iaPayfast = $iaCore->factoryPlugin('payfast', 'common');
 
-	$transaction = $iaTransaction->getBy('sec_key', $iaCore->requestPath[0]);
+    $transaction = $iaTransaction->getBy('sec_key', $iaCore->requestPath[0]);
 
-	if (!$transaction || !$iaPayfast->validateTransaction($_POST, $transaction))
-	{
-		$iaTransaction->addIpnLogEntry($iaPayfast->getPluginName(), $_POST, 'Invalid');
+    if (!$transaction || !$iaPayfast->validateTransaction($_POST, $transaction)) {
+        $iaTransaction->addIpnLogEntry($iaPayfast->getPluginName(), $_POST, 'Invalid');
 
-		return iaView::errorPage(iaView::ERROR_NOT_FOUND);
-	}
+        return iaView::errorPage(iaView::ERROR_NOT_FOUND);
+    }
 
-	$iaTransaction->addIpnLogEntry($iaPayfast->getPluginName(), $_POST, 'Valid');
+    $iaTransaction->addIpnLogEntry($iaPayfast->getPluginName(), $_POST, 'Valid');
 
-	$iaView->disableLayout();
-	$iaView->display(iaView::NONE);
+    $iaView->disableLayout();
+    $iaView->display(iaView::NONE);
 
-	$iaPayfast->handleIpn($_POST, $transaction['id']);
+    $iaPayfast->handleIpn($_POST, $transaction['id']);
 }

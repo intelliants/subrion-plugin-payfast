@@ -2,7 +2,7 @@
 /******************************************************************************
  *
  * Subrion - open source content management system
- * Copyright (C) 2016 Intelliants, LLC <http://www.intelliants.com>
+ * Copyright (C) 2017 Intelliants, LLC <https://intelliants.com>
  *
  * This file is part of Subrion.
  *
@@ -20,31 +20,30 @@
  * along with Subrion. If not, see <http://www.gnu.org/licenses/>.
  *
  *
- * @link http://www.subrion.org/
+ * @link https://subrion.org/
  *
  ******************************************************************************/
 
 $transaction = $iaTransaction->getById($temp_transaction['id']);
 
-switch ($action)
-{
-	case 'completed':
-		$payer = explode(' ', $transaction['fullname']);
+switch ($action) {
+    case 'completed':
+        $payer = explode(' ', $transaction['fullname']);
 
-		$order = array(
-			'payment_gross' => $transaction['amount'],
-			'payment_date' => $transaction['date_paid'],
-			'payment_status' => iaLanguage::get($transaction['status']),
-			'first_name' => $payer[0],
-			'last_name' => empty($payer[1]) ? '' : $payer[1],
-			'payer_email' => $transaction['email'],
-			'txn_id' => $transaction['reference_id'],
-			'mc_currency' => $transaction['currency']
-		);
+        $order = array(
+            'payment_gross' => $transaction['amount'],
+            'payment_date' => $transaction['date_paid'],
+            'payment_status' => iaLanguage::get($transaction['status']),
+            'first_name' => $payer[0],
+            'last_name' => empty($payer[1]) ? '' : $payer[1],
+            'payer_email' => $transaction['email'],
+            'txn_id' => $transaction['reference_id'],
+            'mc_currency' => $transaction['currency']
+        );
 
-		break;
+        break;
 
-	case 'canceled':
-		$error = true;
-		$messages[] = iaLanguage::get('oops');
+    case 'canceled':
+        $error = true;
+        $messages[] = iaLanguage::get('oops');
 }
